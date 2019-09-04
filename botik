@@ -1,4 +1,23 @@
+echo "# HabrParser_Bot" >> README.md
+git init
+git add .
+git add *
+git commit -m "Initial Commit" -a
+git remote add origin origin  #Указываем свою ссылку
+git push -u origin master
+
+heroku login #Вводим email и пароль
+heroku create --region eu habrparserbot #Не забываемпоменять имя приложения
+#P.S. в имени могут быть только буквы в нижнем регитсре, цифры  и тире.
+heroku addons:create heroku-redis:hobby-dev -a habrparserbot #И снова меняем имя!
+heroku buildpacks:set heroku/python
+git push heroku master
+heroku ps:scale bot=1 # запускаем бота
+heroku logs --tail #включаем логи
+
 import bs4
+
+
 import parser
 
 #main variables
